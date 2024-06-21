@@ -66,6 +66,14 @@ jobs:
         ref: gh-pages
         path: gh-pages
 
+    - name: Build test report
+      uses: simple-elf/allure-report-action@v1.7
+      if: ${{ matrix.os == 'ubuntu-latest' }}
+      with:
+        gh_pages: gh-pages
+        allure_history: allure-history
+        allure_results: target/allure-results
+
     - name: Deploy report to Github Pages
       if: ${{ matrix.os == 'ubuntu-latest' && success() }}
       uses: peaceiris/actions-gh-pages@v4
