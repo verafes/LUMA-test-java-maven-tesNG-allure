@@ -57,6 +57,14 @@ jobs:
         ref: gh-pages
         path: gh-pages
 
+    - name: Deploy report to Github Pages
+      if: ${{ matrix.os == 'ubuntu-latest' }}
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: allure-history
+
   check-java-code-style:
     name: Check Java code style
 
