@@ -1,0 +1,6 @@
+default.chrome_options=--window-size=1920,1080
+isHeadless=false
+slowMo=1500
+screenWidth=1366
+screenHeight=768
+disableWebSecurity=true
