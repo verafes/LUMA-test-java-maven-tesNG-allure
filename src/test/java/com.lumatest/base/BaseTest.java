@@ -1,6 +1,7 @@
 package com.lumatest.base;
 
 import com.lumatest.utils.DriverUtils;
+import com.lumatest.utils.ReportUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.Reporter;
@@ -14,13 +15,14 @@ public abstract class BaseTest {
     protected void setupWebDriverManager() {
         WebDriverManager.chromedriver().setup();
         WebDriverManager.firefoxdriver().setup();
-        WebDriverManager.edgedriver().setup();
     }
 
     @Parameters("browser")
     @BeforeMethod()
     protected void setupDriver(@Optional("chrome") String browser, ITestResult result) {
         Reporter.log("______________________________________________________________________", true);
+        Reporter.log("RUN " + result.getMethod().getMethodName(), true);
+
         this.driver = DriverUtils.createDriver(browser, this.driver);
         if (getDriver() == null) {
             Reporter.log("ERROR: Unknown parameter 'browser' - '" + browser + "'.", true);
@@ -32,6 +34,9 @@ public abstract class BaseTest {
     @Parameters("browser")
     @AfterMethod(alwaysRun = true)
     protected void teardown(@Optional("chrome") String browser, ITestResult result) {
+        Reporter.log(result.getMethod().getMethodName() + ": " + ReportUtils.getTestStatus(result),
+                true);
+
         if (getDriver() != null) {
             getDriver().quit();
             Reporter.log("INFO: " + browser.toUpperCase() + " driver closed.", true);
