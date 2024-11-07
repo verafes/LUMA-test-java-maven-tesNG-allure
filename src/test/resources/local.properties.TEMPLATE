@@ -1,0 +1,6 @@
+default.chrome_options=--incognito;--window-size=1920,1080;--headless=false;--disable-gpu;--no-sandbox;--disable-web-security;--allow-running-insecure-content;--ignore-certificate-errors
+isHeadless=false
+slowMo=1500
+screenWidth=1366
+screenHeight=768
+disableWebSecurity=true

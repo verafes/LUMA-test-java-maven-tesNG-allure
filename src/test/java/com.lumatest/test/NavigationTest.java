@@ -8,8 +8,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class NavigationTest extends BaseTest {
-    @Test(description = "TC-01 Open Base URL")
-    @Story("Navigation")
+    @Test(
+            description = "TC-01 Open Base URL",
+            groups = {"Smoke", "Regression"},
+            testName = "NAVIGATION | Open Base URL"
+    )    @Story("Navigation")
     @Severity(SeverityLevel.BLOCKER)
     @Description("To verify that the base URL and title of the app are correct and as expected.")
     @Link(TestData.BASE_URL)
@@ -31,21 +34,22 @@ public class NavigationTest extends BaseTest {
         Assert.assertEquals(actualTitle, expectedTitle);
     }
 
-    @Story("Navigation")
+    @Test(
+            groups = {"Smoke", "Regression"},
+            description = "TC-02 Top Menu Navigation",
+            dataProvider = "navigationMenuData",
+            dataProviderClass = TestData.class,
+            testName = "NAVIGATION | Navigate to top menus"
+    )    @Story("Navigation")
     @Severity(SeverityLevel.BLOCKER)
     @Description("To verify that top navigation menu functions correctly " +
             "and clicking on menu items navigate to the expected URL with the expected title.")
     @Link(TestData.BASE_URL)
-    @Test(
-            description = "TC-02 Top Menu Navigation",
-            dataProvider = "navigationMenuData",
-            dataProviderClass = TestData.class
-    )
     public void testNavigationMenu(String baseUrl, By navMenu, String expectedUrl, String expectedTitle) {
         Allure.step("Open Base URL");
         getDriver().get(baseUrl);
 
-        Allure.step("Click on the navigation menu" + navMenu.toString());
+        Allure.step("Click on the navigation menu " + navMenu.toString());
         getDriver().findElement(navMenu).click();
 
         Allure.step("Collect actualURL, actualTitle");
