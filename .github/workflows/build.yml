@@ -19,6 +19,10 @@ jobs:
       max-parallel: 4
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
+        browser: [ chrome, firefox ]
+        exclude:
+          - os: macos-latest
+            browser: firefox
 
     runs-on: ${{ matrix.os }}
 
@@ -43,10 +47,18 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-    - name: Test with Maven
+    - name: Test with Maven (Chrome on macOS)
+      if: ${{ matrix.browser == 'chrome' && matrix.os == 'macos-latest' }}
       run: mvn test
       env:
         CHROME_OPTIONS: --remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080
+        CI_RUN: true
+
+    - name: Test with Maven (on ubuntu and windows)
+      run: mvn test -Dbrowser=${{ matrix.browser }} -e
+      env:
+        CHROME_OPTIONS: --remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080
+        FIREFOX_OPTIONS: --headless;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--window-size=1920,1080
         CI_RUN: true
 
     - name: Dorny Test Reporter
