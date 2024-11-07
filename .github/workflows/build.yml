@@ -49,7 +49,7 @@ jobs:
 
     - name: Test with Maven (Chrome on macOS)
       if: ${{ matrix.browser == 'chrome' && matrix.os == 'macos-latest' }}
-      run: mvn test
+      run: mvn test -Dbrowser=chrome
       env:
         CHROME_OPTIONS: --remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080
         CI_RUN: true
