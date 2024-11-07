@@ -55,6 +55,7 @@ jobs:
         CI_RUN: true
 
     - name: Test with Maven (on ubuntu and windows)
+      if: ${{ matrix.os != 'macos-latest' }}
       run: mvn test -Dbrowser=${{ matrix.browser }} -e
       env:
         CHROME_OPTIONS: --remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080
