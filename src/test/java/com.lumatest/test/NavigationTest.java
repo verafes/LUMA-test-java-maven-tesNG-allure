@@ -12,7 +12,8 @@ public class NavigationTest extends BaseTest {
             description = "TC-01 Open Base URL",
             groups = {"Smoke", "Regression"},
             testName = "NAVIGATION | Open Base URL"
-    )    @Story("Navigation")
+    )
+    @Story("Navigation")
     @Severity(SeverityLevel.BLOCKER)
     @Description("To verify that the base URL and title of the app are correct and as expected.")
     @Link(TestData.BASE_URL)
@@ -40,7 +41,8 @@ public class NavigationTest extends BaseTest {
             dataProvider = "navigationMenuData",
             dataProviderClass = TestData.class,
             testName = "NAVIGATION | Navigate to top menus"
-    )    @Story("Navigation")
+    )
+    @Story("Navigation")
     @Severity(SeverityLevel.BLOCKER)
     @Description("To verify that top navigation menu functions correctly " +
             "and clicking on menu items navigate to the expected URL with the expected title.")
