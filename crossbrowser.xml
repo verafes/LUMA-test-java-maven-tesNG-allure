@@ -5,6 +5,7 @@
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.lumatest.test.NavigationTest"/>
+            <class name="com.lumatest.test.ProductPageTest"></class>
             <class name="FrameworkTest"/>
         </classes>
     </test>
@@ -12,6 +13,7 @@
         <parameter name="browser" value="firefox"/>
         <classes>
             <class name="com.lumatest.test.NavigationTest"/>
+            <class name="com.lumatest.test.ProductPageTest"></class>
         </classes>
     </test>
 
