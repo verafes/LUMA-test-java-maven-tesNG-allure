@@ -11,10 +11,13 @@ import org.testng.annotations.*;
 public abstract class BaseTest {
     private WebDriver driver;
 
+    @Parameters("browser")
     @BeforeSuite
-    protected void setupWebDriverManager() {
+    protected void setupWebDriverManager(@Optional("chrome") String browser) {
         WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
+        if (browser.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+        }
     }
 
     @Parameters("browser")
