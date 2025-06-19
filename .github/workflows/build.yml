@@ -109,5 +109,7 @@ jobs:
     - name: Run java checkstyle
       uses: nikitasavinov/checkstyle-action@0.6.0
       with:
-        reporter: github-pr-review
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        reporter: github-check
+        fail_on_error: false
+        checkstyle_config: google_checks.xml
